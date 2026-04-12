@@ -2,20 +2,37 @@ namespace FantasticVendingMachine.Models;
 
 public class Inventory
 {
-    private List<Product> _products = new List<Product>();
+    public Dictionary<Product, int> Stock { get; set; } = new();
 
-    public void AddProduct(Product product)
+    public void AddProduct(Product product, int quantity)
     {
-        _products.Add(product);
-    }
-
-    public List<Product> GetAllProducts()
-    {
-        return _products;
+        if (Stock.ContainsKey(product))
+        {
+            Stock[product] += quantity;
+        }
+        else
+        {
+            Stock[product] = quantity;
+        }
     }
 
     public Product? GetProductByName(string name)
     {
-        return _products.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        return Stock.Keys.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
+
+    public void ReduceStock(Product product)
+    {
+        if (Stock.ContainsKey(product) && Stock[product] > 0)
+        {
+            Stock[product]--;
+        }
+    }
+
+    public List<Product> GetAllProducts()
+    {
+        return Stock.Keys.ToList();
+    }
+
+    
 }

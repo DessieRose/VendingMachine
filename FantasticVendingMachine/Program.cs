@@ -3,11 +3,18 @@
 VendingMachine machine = new VendingMachine();
 User player = new User();
 
-machine.Stock.AddProduct(new Product("Cola", 1.50m));
-machine.Stock.AddProduct(new Product("Chips", 2.00m));
-machine.Stock.AddProduct(new Product("Cookies", 2.50m));
-machine.Stock.AddProduct(new Product("Candy", 1.50m));
-
+var savedStock = StorageService.LoadData();
+if (savedStock.Count > 0)
+{
+    machine.Stock.Stock = savedStock;
+}
+else
+{
+    machine.Stock.AddProduct(new Product("Cola", 1.50m), 5);
+    machine.Stock.AddProduct(new Product("Chips", 2.00m), 5);
+    machine.Stock.AddProduct(new Product("Cookies", 2.50m), 5);
+    machine.Stock.AddProduct(new Product("Candy", 1.50m), 5);
+}
 
 player.Wallet.Deposit(10.00m);
 

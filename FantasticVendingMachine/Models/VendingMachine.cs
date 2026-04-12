@@ -9,9 +9,9 @@ public class VendingMachine
     {
         Product? product = Stock.GetProductByName(itemName);
 
-        if (product == null)
+        if (product == null || Stock.Stock[product] <= 0)
         {
-            Console.WriteLine($"Error: '{itemName}' not found in the machine.");
+            Console.WriteLine($"Error: {itemName} is out of stock!");
             return;
         }
 
@@ -19,8 +19,11 @@ public class VendingMachine
         {
             MachineBank.Deposit(product.Price);
             user.PurchasedItems.Add(product);
+            Stock.ReduceStock(product);
+
+            StorageService.SaveData(Stock);
             
-            Console.WriteLine($"Success! You bought {product.Name}.");
+            Console.WriteLine($"Success! You bought {product.Name}. {Stock.Stock[product]} left.");
         }
         else
         {
