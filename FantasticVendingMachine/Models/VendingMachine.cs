@@ -1,5 +1,3 @@
-using System;
-
 namespace FantasticVendingMachine.Models;
 
 public class VendingMachine
