@@ -60,11 +60,15 @@ while (running)
             if (decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
                 player.Wallet.Deposit(amount);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Added {amount:C} to your wallet.");
+                Console.ResetColor();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid amount!");
+                Console.ResetColor();
             }
             break;
 
@@ -74,7 +78,9 @@ while (running)
             break;
 
         default:
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid choice. Please pick 1-5.");
+            Console.ResetColor();
             break;
     }
 }

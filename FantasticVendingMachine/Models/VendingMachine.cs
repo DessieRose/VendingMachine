@@ -11,7 +11,9 @@ public class VendingMachine
 
         if (product == null || Stock.Stock[product] <= 0)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Error: {itemName} is out of stock!");
+            Console.ResetColor();
             return;
         }
 
@@ -22,13 +24,17 @@ public class VendingMachine
             Stock.ReduceStock(product);
 
             StorageService.SaveData(Stock);
-            
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Success! You bought {product.Name}. {Stock.Stock[product]} left.");
+            Console.ResetColor();
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Error: You don't have enough money for {product.Name}!");
             Console.WriteLine($"Price: {product.Price:C} | Your Balance: {user.Wallet.Balance:C}");
+            Console.ResetColor();
         }
     }
 
@@ -37,15 +43,15 @@ public class VendingMachine
         var items = Stock.GetAllProducts();
         Console.WriteLine("\n--- Vending Machine Inventory ---");
         
-        if (items.Count == 0)
+        if (Stock.Stock.Count == 0)
         {
             Console.WriteLine("The machine is currently empty.");
         }
         else
         {
-            foreach (var item in items)
+            foreach (var kvp in Stock.Stock)
             {
-                Console.WriteLine($"- {item.Name}: {item.Price:C}");
+                Console.WriteLine($"- {kvp.Key.Name}: {kvp.Key.Price:C} ({kvp.Value} left)");
             }
         }
     }
