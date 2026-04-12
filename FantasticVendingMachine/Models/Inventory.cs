@@ -34,5 +34,17 @@ public class Inventory
         return Stock.Keys.ToList();
     }
 
+    public bool Restock(int quantity = 5)
+    {
+        if (Stock.Values.All(q => q >= quantity))
+            return false;
+
+        foreach (var product in Stock.Keys.ToList())
+        {
+            Stock[product] = quantity;
+        }
+        return true;
+    }
+
     
 }

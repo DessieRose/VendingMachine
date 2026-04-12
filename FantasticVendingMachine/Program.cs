@@ -30,7 +30,8 @@ while (running)
     Console.WriteLine("2. Buy an Item");
     Console.WriteLine("3. Check My Backpack (Purchased Items)");
     Console.WriteLine("4. Add Money to Wallet");
-    Console.WriteLine("5. Exit");
+    Console.WriteLine("5. Restock Machine");
+    Console.WriteLine("6. Exit");
     Console.Write("\nChoose an option: ");
 
     string? choice = Console.ReadLine();
@@ -73,13 +74,28 @@ while (running)
             break;
 
         case "5":
+            if (machine.Stock.Restock())
+            {
+                StorageService.SaveData(machine.Stock);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("The machine has been restocked!");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The machine is already fully stocked!");
+            }
+            Console.ResetColor();
+            break;
+
+        case "6":
             running = false;
             Console.WriteLine("Thanks for using the Fantastic Vending Machine! Goodbye!");
             break;
 
         default:
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid choice. Please pick 1-5.");
+            Console.WriteLine("Invalid choice. Please pick 1-6.");
             Console.ResetColor();
             break;
     }
