@@ -1,6 +1,6 @@
 # VendingMachine
 
-A console-based vending machine simulator built in C#. Browse items, make purchases, manage your wallet, and restock the machine — all from the terminal.
+A console-based vending machine simulator built in C#. Browse items, make purchases, manage your wallet, and restock the machine.
 
 ## Features
 
