@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Cola",
+    "Price": 1.50,
+    "Quantity": 5
+  },
+  {
+    "Name": "Chips",
+    "Price": 2.00,
+    "Quantity": 5
+  },
+  {
+    "Name": "Cookies",
+    "Price": 2.50,
+    "Quantity": 5
+  },
+  {
+    "Name": "Candy",
+    "Price": 1.50,
+    "Quantity": 5
+  }
+]
